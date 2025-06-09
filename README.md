@@ -11,6 +11,17 @@ Este proyecto es una API de autenticación desarrollada con Spring Boot 2.5.14, 
 - Manejo global de excepciones (400, 401, 409, 500).
 - Documentación Swagger accesible desde `/swagger-ui/index.html`.
 
+## 🧩 Component Diagram
+
+![Component Diagram](src/main/resources/diagramas/componentes.png)
+
+## 🔁 Sequence Diagram
+Login
+![Sequence Diagram](src/main/resources/diagramas/secuencia-login.png)
+
+Sign-Up
+![Sequence Diagram](src/main/resources/diagramas/secuencia-sign-up.png)
+
 ## Endpoints
 
 ### POST `/api/v1/sign-up`
