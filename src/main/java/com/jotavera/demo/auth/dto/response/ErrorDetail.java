@@ -1,6 +1,5 @@
 package com.jotavera.demo.auth.dto.response;
 
-import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDateTime;
 

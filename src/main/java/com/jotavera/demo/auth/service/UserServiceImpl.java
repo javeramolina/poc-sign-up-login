@@ -73,8 +73,8 @@ public class UserServiceImpl implements UserService {
 
         user.setPhones(phones);
         user.setLastLogin(LocalDateTime.now());
-
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user;
     }
     @Transactional
     public UserResponse login(String authHeader) {

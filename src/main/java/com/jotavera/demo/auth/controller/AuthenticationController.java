@@ -4,8 +4,6 @@ import com.jotavera.demo.auth.dto.request.SignUpRequest;
 import com.jotavera.demo.auth.dto.response.SignUpResponse;
 import com.jotavera.demo.auth.dto.response.UserResponse;
 import com.jotavera.demo.auth.service.UserService;
-
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -49,6 +47,5 @@ public class AuthenticationController {
         UserResponse userResponse = userService.login(authHeader);
         return ResponseEntity.ok(userResponse);
     }
-
 
 }

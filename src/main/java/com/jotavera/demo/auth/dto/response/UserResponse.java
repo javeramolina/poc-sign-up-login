@@ -3,7 +3,6 @@ package com.jotavera.demo.auth.dto.response;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Getter;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;

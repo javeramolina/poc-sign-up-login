@@ -23,7 +23,7 @@ public class SecurityConfig{
 
     private static final String[] PUBLIC_ROUTES = {
             "/swagger-ui/**",
-            "/v3/api-docs/**",          // Required for Swagger to fetch your API docs
+            "/v3/api-docs/**",
             "/swagger-resources/**",
             "/api/v1/sign-up",
             "/h2-console/**"

@@ -107,6 +107,37 @@ La aplicación estará disponible en: `http://localhost:8080`
 - Rutas protegidas requieren el token JWT válido en el header `Authorization`.
 
 ---
+Coverage
+
+## Cobertura de Código con JaCoCo
+
+Este proyecto utiliza **JaCoCo** para medir la cobertura de pruebas automatizadas.
+
+### Comando para generar el reporte
+
+Ejecuta el siguiente comando en la raíz del proyecto:
+
+```bash
+./gradlew clean test jacocoTestReport
+```
+
+Esto ejecutará las pruebas y generará un reporte HTML con los resultados de cobertura.
+
+### Ver el reporte
+
+Puedes abrir el reporte en tu navegador desde la siguiente ruta:
+
+```
+build/reports/jacoco/test/html/index.html
+```
+
+### Requisito mínimo
+
+> ⚠️ **Cobertura mínima requerida: 80%**
+
+Para cumplir con los estándares del proyecto, se requiere una cobertura de código del **80% o superior**.
+
+---
 
 ## Autor
 

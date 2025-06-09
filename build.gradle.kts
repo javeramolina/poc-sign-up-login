@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "2.5.14"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id("jacoco")
 }
 
 group = "com.jvera.goballogic"
@@ -37,8 +38,60 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation ("org.springdoc:springdoc-openapi-ui:1.7.0")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.mockito:mockito-core")
+
 }
 
-tasks.withType<Test> {
+tasks.test {
 	useJUnitPlatform()
+	finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+	dependsOn(tasks.test)
+	reports {
+		html.required.set(true)
+	}
+
+	classDirectories.setFrom(
+		files(classDirectories.files.map {
+			fileTree(it) {
+				exclude(
+					"**/JwtService.class",
+					"**/SecurityConfig.class",
+					"**/dto/**",
+					"**/exception/**",
+					"**/filter/**",
+					"**/model/**",
+					"**/repository/**",
+					"**/config/**",
+					"**/controller/**",
+					"com/jotavera/demo/auth/LoginSignupAppApplication.class",
+					"com/jotavera/demo/auth/service/JwtService.class",
+					"com/jotavera/demo/auth/service/UserService.class"
+				)
+			}
+		})
+	)
+
+}
+
+tasks.jacocoTestCoverageVerification {
+	dependsOn(tasks.test)
+
+	violationRules {
+		rule {
+			limit {
+				minimum = "0.80".toBigDecimal()
+			}
+		}
+	}
+
+	classDirectories.setFrom(tasks.jacocoTestReport.get().classDirectories)
+	executionData.setFrom(tasks.jacocoTestReport.get().executionData)
+}
+
+tasks.check {
+	dependsOn(tasks.named("jacocoTestCoverageVerification"))
 }
