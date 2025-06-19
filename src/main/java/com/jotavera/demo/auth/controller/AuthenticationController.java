@@ -12,9 +12,11 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
+/**
+ * Handles user authentication and registration endpoints.
+ */
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
@@ -23,6 +25,13 @@ public class AuthenticationController {
 
     private final UserService userService;
 
+
+    /**
+     * Registers a new user.
+     *
+     * @param signUpRequest the user registration data
+     * @return the registered user info
+     */
     @Operation(summary = "Register a new user")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "User successfully registered"),
@@ -35,6 +44,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(userResponse);
     }
 
+    /**
+     * Authenticates a user using a JWT token.
+     *
+     * @param authHeader the Authorization header with the JWT token
+     * @return the authenticated user info
+     */
     @Operation(summary = "Login with JWT token")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "User authenticated"),

@@ -6,21 +6,33 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
-
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
+/**
+ * Service for generating and validating JWT tokens.
+ */
 @Service
 public class JwtService {
 
     private final Key key;
 
+    /**
+     * Initializes the JWT signing key.
+     * TODO must be a secret
+     */
     public JwtService() {
         String secret = "my-super-secret-key-should-be-32-bytes!";
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
+    /**
+     * Generates a JWT token for the given subject.
+     *
+     * @param subject the token subject (e.g., user email)
+     * @return the signed JWT token
+     */
     public String generateToken(String subject) {
         return Jwts.builder()
                 .setSubject(subject)
@@ -30,6 +42,13 @@ public class JwtService {
                 .compact();
     }
 
+    /**
+     * Extracts the subject (e.g., email) from a JWT token.
+     *
+     * @param token the JWT token
+     * @return the subject
+     * @throws JwtInvalidException if the token is invalid or expired
+     */
     public String extractSubject(String token) {
         try {
             return Jwts.parserBuilder()
@@ -43,6 +62,12 @@ public class JwtService {
         }
     }
 
+    /**
+     * Checks if a JWT token is valid and not expired.
+     *
+     * @param token the JWT token
+     * @return true if valid, false otherwise
+     */
     public boolean isValid(String token) {
         try {
             return !Jwts.parserBuilder()

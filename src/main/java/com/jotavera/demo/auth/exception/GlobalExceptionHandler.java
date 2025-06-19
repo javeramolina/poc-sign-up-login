@@ -12,9 +12,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Handles global exceptions and maps them to proper HTTP responses.
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * Handles existing user registration attempts.
+     */
     @ExceptionHandler(UserAlreadyExistsException.class)
     public ResponseEntity<?> handleUserAlreadyExists(UserAlreadyExistsException ex) {
         ErrorDetail error = new ErrorDetail(409, ex.getMessage());
@@ -23,6 +29,9 @@ public class GlobalExceptionHandler {
         );
     }
 
+    /**
+     * Handles validation errors for invalid method arguments.
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationException(MethodArgumentNotValidException ex) {
         List<ErrorDetail> errors = ex.getBindingResult().getFieldErrors().stream()
@@ -32,6 +41,9 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", errors));
     }
 
+    /**
+     * Handles invalid JWT token exceptions.
+     */
     @ExceptionHandler(JwtInvalidException.class)
     public ResponseEntity<?> handleJwtInvalidException(JwtInvalidException ex) {
         ErrorDetail error = new ErrorDetail(401, ex.getMessage());
@@ -40,6 +52,9 @@ public class GlobalExceptionHandler {
         );
     }
 
+    /**
+     * Handles JWT signature exceptions.
+     */
     @ExceptionHandler(SignatureException.class)
     public ResponseEntity<?> handleSignatureExceptionInvalidException(SignatureException ex) {
         ErrorDetail error = new ErrorDetail(401, ex.getMessage());
@@ -48,6 +63,9 @@ public class GlobalExceptionHandler {
         );
     }
 
+    /**
+     * Handles any unexpected exceptions.
+     */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleGenericException(Exception ex) {
         ErrorDetail error = new ErrorDetail(500, "Unexpected error: " + ex.getMessage());

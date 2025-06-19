@@ -19,6 +19,9 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Implementation of {@link UserService} for user registration and authentication.
+ */
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -29,6 +32,14 @@ public class UserServiceImpl implements UserService {
 
     private final JwtService jwtService;
 
+
+    /**
+     * Registers a new user.
+     *
+     * @param signUpRequest the sign-up data
+     * @return the created user response
+     * @throws UserAlreadyExistsException if the user already exists
+     */
     public SignUpResponse signUp(SignUpRequest signUpRequest) {
         Optional <User> user = userRepository.findByEmail(signUpRequest.getEmail());
         if (user.isPresent()) {
@@ -39,6 +50,7 @@ public class UserServiceImpl implements UserService {
 
         return signUpResponse;
     }
+
 
     private SignUpResponse generateResponse(User userCreateResponse) {
         return SignUpResponse.builder()
@@ -51,6 +63,9 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * Creates and saves a new user entity from the request.
+     */
     private User createUser(SignUpRequest signUpRequest) {
 
         User user = User.builder()
@@ -76,6 +91,13 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         return user;
     }
+
+    /**
+     * Logs in a user using a JWT token and updates last login info.
+     *
+     * @param authHeader the Authorization header with the token
+     * @return the user response
+     */
     @Transactional
     public UserResponse login(String authHeader) {
         String token = authHeader.replace("Bearer ", "");
