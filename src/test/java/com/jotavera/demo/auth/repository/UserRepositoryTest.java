@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
 class UserRepositoryTest {
 
+    @SuppressWarnings("FieldMayBeFinal")
     @Autowired
     private UserRepository userRepository;
 
