@@ -64,9 +64,7 @@ tasks.jacocoTestReport {
 					"**/exception/**",
 					"**/filter/**",
 					"**/model/**",
-					"**/repository/**",
 					"**/config/**",
-					"**/controller/**",
 					"com/jotavera/demo/auth/LoginSignupAppApplication.class",
 					"com/jotavera/demo/auth/service/JwtService.class",
 					"com/jotavera/demo/auth/service/UserService.class"

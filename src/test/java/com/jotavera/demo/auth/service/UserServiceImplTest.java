@@ -61,8 +61,8 @@ class UserServiceImplTest {
         phone.setContrycode("+56");
 
         SignUpRequest request = new SignUpRequest();
-        request.setName("John Doe");
-        request.setEmail("john.doe@example.com");
+        request.setName("Jesus Vera");
+        request.setEmail("jesus.vera@example.com");
         request.setPassword("abcdeF12");
         request.setPhones(List.of(phone));
 
@@ -84,12 +84,12 @@ class UserServiceImplTest {
     void login_ShouldReturnUserResponse_WhenTokenIsValid() {
 
         String token = "Bearer dummy.token.here";
-        String email = "john.doe@example.com";
+        String email = "jesus.vera@example.com";
         String newToken = "new.jwt.token";
 
         User user = User.builder()
                 .idUser(UUID.randomUUID())
-                .name("John Doe")
+                .name("Jesus Vera")
                 .email(email)
                 .password(new BCryptPasswordEncoder().encode("Abcde123"))
                 .token(token)
