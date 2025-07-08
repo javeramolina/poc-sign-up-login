@@ -38,7 +38,7 @@ Registra un nuevo usuario.
     {
       "number": 87650009,
       "citycode": "1",
-      "countrycode": "56"
+      "contrycode": "56"
     }
   ]
 }
